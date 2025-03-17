@@ -2,8 +2,7 @@
   "items": [
     {
       "id": "minecraft:apple",
-      "minTicks": 12000,
-      "maxTicks": 24000,
+      "ticks": 24000,
       "pristineThreshold": 0.9,
       "freshThreshold": 0.7,
       "agingThreshold": 0.5,
@@ -14,8 +13,7 @@
     },
     {
       "id": "minecraft:bread",
-      "minTicks": 24000,
-      "maxTicks": 48000,
+      "ticks": 48000,
       "pristineThreshold": 0.85,
       "freshThreshold": 0.65,
       "agingThreshold": 0.45,
