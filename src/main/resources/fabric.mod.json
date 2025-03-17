@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "food_expiry",
+  "version": "${version}",
+  "name": "FoodExpiry",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/marco/FoodExpiry"
+  },
+  "license": "MIT",
+  "icon": "assets/food_expiry/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+
+    ],
+    "main": [
+      "com.chaotic_loom.food_expiry.FoodExpiry"
+    ]
+  },
+  "mixins": [
+    "food_expiry.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

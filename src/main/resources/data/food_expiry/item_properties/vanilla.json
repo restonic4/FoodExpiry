@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": "minecraft:apple",
+      "minTicks": 12000,
+      "maxTicks": 24000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "rottenThreshold": 0.1,
+      "moldyThreshold": 0.05
+    },
+    {
+      "id": "minecraft:bread",
+      "minTicks": 24000,
+      "maxTicks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "rottenThreshold": 0.1,
+      "moldyThreshold": 0.05
+    }
+  ]
+}
