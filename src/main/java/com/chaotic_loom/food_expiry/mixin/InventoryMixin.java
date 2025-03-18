@@ -1,17 +1,20 @@
 package com.chaotic_loom.food_expiry.mixin;
 
-import com.chaotic_loom.food_expiry.datadriven.FoodExpiryDataDrivenManager;
+import com.chaotic_loom.food_expiry.datadriven.FEDataDrivenManager;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.LongTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(Inventory.class)
 public abstract class InventoryMixin {
@@ -25,27 +28,42 @@ public abstract class InventoryMixin {
                     shift = At.Shift.AFTER
             )
     )
-    private void onAddResource(int slot, ItemStack newStack, CallbackInfoReturnable<Integer> cir) {
-        ItemStack existingStack = this.getItem(slot);
+    private void onAddResource(
+            int slot,
+            ItemStack newStack,
+            CallbackInfoReturnable<Integer> cir,
+            @Local(ordinal = 1) ItemStack originalStack,
+            @Local(ordinal = 2) int addedAmount
+    ) {
+        if (FEDataDrivenManager.hasTag(newStack)) {
+            CompoundTag newTag = newStack.getTag();
+            ListTag newTicks = newTag.getList(FEDataDrivenManager.TICKS_TAG, Tag.TAG_LONG);
 
-        CompoundTag existingTag = existingStack.getOrCreateTag();
-        CompoundTag newItemTag = newStack.getOrCreateTag();
-
-        String key = FoodExpiryDataDrivenManager.TICKS_TAG;
-
-        if (newItemTag.contains(key, Tag.TAG_LIST)) {
-            ListTag combinedList = new ListTag();
-
-            if (existingTag.contains(key, Tag.TAG_LIST)) {
-                combinedList.addAll(existingTag.getList(key, Tag.TAG_LONG));
-            } else {
-                for (int i = 0; i < existingStack.getCount(); i++) {
-                    combinedList.add(LongTag.valueOf(0));
-                }
+            // Tomar 'addedAmount' entradas del nuevo stack
+            ListTag takenEntries = new ListTag();
+            for(int i = 0; i < Math.min(addedAmount, newTicks.size()); i++) {
+                takenEntries.add(newTicks.get(i));
             }
 
-            combinedList.addAll(newItemTag.getList(key, Tag.TAG_LONG));
-            existingTag.put(key, combinedList);
+            // Actualizar el nuevo stack con entradas restantes
+            ListTag remainingEntries = new ListTag();
+            for(int i = takenEntries.size(); i < newTicks.size(); i++) {
+                remainingEntries.add(newTicks.get(i));
+            }
+            newTag.put(FEDataDrivenManager.TICKS_TAG, remainingEntries);
+            if (remainingEntries.isEmpty()) {
+                newTag.remove(FEDataDrivenManager.TICKS_TAG);
+            }
+
+            // Añadir entradas al stack original
+            CompoundTag originalTag = originalStack.getOrCreateTag();
+            ListTag originalTicks = originalTag.getList(FEDataDrivenManager.TICKS_TAG, Tag.TAG_LONG);
+            originalTicks.addAll(takenEntries);
+            originalTag.put(FEDataDrivenManager.TICKS_TAG, originalTicks);
+
+            // Corregir conteos
+            FEDataDrivenManager.fixFood(originalStack);
+            FEDataDrivenManager.fixFood(newStack);
         }
     }
 }

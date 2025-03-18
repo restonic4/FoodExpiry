@@ -2,25 +2,799 @@
   "items": [
     {
       "id": "minecraft:apple",
+      "ticks": 48000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.9,
+        "normal": 1.0,
+        "hot": 1.1
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.1,
+        "autumn": 0.9,
+        "winter": 0.8
+      }
+    },
+    {
+      "id": "minecraft:baked_potato",
       "ticks": 24000,
       "pristineThreshold": 0.9,
       "freshThreshold": 0.7,
       "agingThreshold": 0.5,
       "staleThreshold": 0.3,
       "spoiledThreshold": 0.2,
-      "rottenThreshold": 0.1,
-      "moldyThreshold": 0.05
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:beef",
+      "ticks": 24000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.6,
+        "normal": 1.0,
+        "hot": 1.4
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.3,
+        "autumn": 0.9,
+        "winter": 0.5
+      }
+    },
+    {
+      "id": "minecraft:beetroot",
+      "ticks": 48000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.8,
+        "normal": 1.0,
+        "hot": 1.1
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.1,
+        "autumn": 0.9,
+        "winter": 0.8
+      }
+    },
+    {
+      "id": "minecraft:beetroot_soup",
+      "ticks": 24000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
     },
     {
       "id": "minecraft:bread",
+      "ticks": 48000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.8,
+        "normal": 1.0,
+        "hot": 1.2
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.1,
+        "autumn": 0.9,
+        "winter": 0.7
+      }
+    },
+    {
+      "id": "minecraft:carrot",
+      "ticks": 60000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.8,
+        "normal": 1.0,
+        "hot": 1.0
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.0,
+        "autumn": 0.9,
+        "winter": 0.8
+      }
+    },
+    {
+      "id": "minecraft:chicken",
+      "ticks": 24000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.6,
+        "normal": 1.0,
+        "hot": 1.4
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.3,
+        "autumn": 0.9,
+        "winter": 0.5
+      }
+    },
+    {
+      "id": "minecraft:chorus_fruit",
+      "ticks": 72000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.95,
+        "normal": 1.0,
+        "hot": 1.05
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.0,
+        "autumn": 1.0,
+        "winter": 1.0
+      }
+    },
+    {
+      "id": "minecraft:cod",
+      "ticks": 24000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.6,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.5
+      }
+    },
+    {
+      "id": "minecraft:cooked_beef",
       "ticks": 48000,
       "pristineThreshold": 0.85,
       "freshThreshold": 0.65,
       "agingThreshold": 0.45,
       "staleThreshold": 0.25,
       "spoiledThreshold": 0.15,
-      "rottenThreshold": 0.1,
-      "moldyThreshold": 0.05
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:cooked_chicken",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:cooked_cod",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:cooked_mutton",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:cooked_porkchop",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:cooked_rabbit",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:cooked_salmon",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:cookie",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:dried_kelp",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:enchanted_golden_apple",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:golden_apple",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:golden_carrot",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:honey_bottle",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:melon_slice",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:mushroom_stew",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:mutton",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:poisonous_potato",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:porkchop",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:potato",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:pufferfish",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:pumpkin_pie",
+      "ticks": 54000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:rabbit",
+      "ticks": 24000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:rabbit_stew",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:rotten_flesh",
+      "ticks": 24000,
+      "spoiledThreshold": 1.0,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:salmon",
+      "ticks": 24000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:spider_eye",
+      "ticks": 24000,
+      "pristineThreshold": 0.8,
+      "freshThreshold": 0.6,
+      "agingThreshold": 0.4,
+      "staleThreshold": 0.2,
+      "spoiledThreshold": 0.1,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:suspicious_stew",
+      "ticks": 48000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:sweet_berries",
+      "ticks": 72000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:glow_berries",
+      "ticks": 72000,
+      "pristineThreshold": 0.85,
+      "freshThreshold": 0.65,
+      "agingThreshold": 0.45,
+      "staleThreshold": 0.25,
+      "spoiledThreshold": 0.15,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
+    },
+    {
+      "id": "minecraft:tropical_fish",
+      "ticks": 24000,
+      "pristineThreshold": 0.9,
+      "freshThreshold": 0.7,
+      "agingThreshold": 0.5,
+      "staleThreshold": 0.3,
+      "spoiledThreshold": 0.2,
+      "temperatureVelocityModifiers": {
+        "cold": 0.7,
+        "normal": 1.0,
+        "hot": 1.3
+      },
+      "seasonVelocityModifiers": {
+        "spring": 1.0,
+        "summer": 1.2,
+        "autumn": 0.9,
+        "winter": 0.6
+      }
     }
   ]
 }

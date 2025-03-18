@@ -1,14 +1,11 @@
 package com.chaotic_loom.food_expiry.mixin;
 
-import com.chaotic_loom.food_expiry.FoodExpiry;
-import com.chaotic_loom.food_expiry.datadriven.FoodExpiryDataDrivenManager;
+import com.chaotic_loom.food_expiry.datadriven.FEDataDrivenManager;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.LongTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ClickAction;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -19,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Random;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
@@ -34,12 +33,12 @@ public class ItemStackMixin {
     @Unique
     private void initFoodData(ItemStack stack) {
         CompoundTag nbt = stack.getOrCreateTag();
-        if (!nbt.contains(FoodExpiryDataDrivenManager.TICKS_TAG)) {
+        if (!nbt.contains(FEDataDrivenManager.TICKS_TAG)) {
             ListTag timestamps = new ListTag();
             for (int i = 0; i < stack.getCount(); i++) {
-                timestamps.add(LongTag.valueOf(0));
+                timestamps.add(LongTag.valueOf(new Random().nextInt(1000)));
             }
-            nbt.put(FoodExpiryDataDrivenManager.TICKS_TAG, timestamps);
+            nbt.put(FEDataDrivenManager.TICKS_TAG, timestamps);
         }
     }
 
@@ -48,42 +47,55 @@ public class ItemStackMixin {
         ItemStack original = (ItemStack) (Object) this;
         ItemStack newStack = cir.getReturnValue();
 
-        if (original.hasTag() && original.getTag().contains(FoodExpiryDataDrivenManager.TICKS_TAG)) {
-            ListTag originalTimestamps = original.getTag().getList(FoodExpiryDataDrivenManager.TICKS_TAG, Tag.TAG_LONG);
+        // This happens when you move stacks on you inventory / picking them with your cursor
+        if (original.getCount() == 0) {
+            return;
+        }
 
-            int originalCount = original.getCount();
-            int splitCount = newStack.getCount();
+        System.out.println("Split size: " + size);
+        System.out.println("Original size: " + original.getCount());
+        System.out.println("New size: " + newStack.getCount());
 
-            // Ensure the list size matches the item count before proceeding
-            if (originalTimestamps.size() != originalCount + splitCount) {
-                throw new IllegalStateException("Mismatch between timestamps size and item stack counts! Original ticks count: " + originalTimestamps.size() + ", original count: " + originalCount + ", new count: " + splitCount);
+        if (FEDataDrivenManager.hasTag(original)) {
+            CompoundTag originalTag = original.getTag();
+            ListTag originalTicks = originalTag.getList(FEDataDrivenManager.TICKS_TAG, Tag.TAG_LONG);
+
+            int originalCountAfterSplit = original.getCount();
+            int newCount = newStack.getCount();
+
+            ListTag originalTicksNew = new ListTag();
+            ListTag newTicksNew = new ListTag();
+
+            // Asignar entradas al stack original
+            int originalTake = Math.min(originalTicks.size(), originalCountAfterSplit);
+            for (int i = 0; i < originalTake; i++) {
+                originalTicksNew.add(originalTicks.get(i));
             }
 
-            // Create separate timestamp lists for the split stacks
-            ListTag newTicks = new ListTag();
-            for (int i = 0; i < splitCount; i++) {
-                if (i < originalTimestamps.size()) { // Ensure we don't exceed bounds
-                    newTicks.add(originalTimestamps.get(i));
-                }
+            // Asignar entradas al nuevo stack
+            int remaining = originalTicks.size() - originalTake;
+            int newTake = Math.min(remaining, newCount);
+            for (int i = originalTake; i < originalTake + newTake; i++) {
+                newTicksNew.add(originalTicks.get(i));
             }
 
-            ListTag remainingTicks = new ListTag();
-            for (int i = splitCount; i < originalTimestamps.size(); i++) {
-                remainingTicks.add(originalTimestamps.get(i));
-            }
+            // Aplicar los nuevos tags
+            originalTag.put(FEDataDrivenManager.TICKS_TAG, originalTicksNew);
+            newStack.getOrCreateTag().put(FEDataDrivenManager.TICKS_TAG, newTicksNew);
 
-            // Set the tags for the "original" and "newStack"
-            original.getTag().put(FoodExpiryDataDrivenManager.TICKS_TAG, remainingTicks);
-            newStack.getOrCreateTag().put(FoodExpiryDataDrivenManager.TICKS_TAG, newTicks);
+            // Corregir posibles discrepancias
+            FEDataDrivenManager.fixFood(original);
+            FEDataDrivenManager.fixFood(newStack);
         }
     }
+
 
     // Allow stacking with different nbt data
 
     @Inject(method = "isSameItemSameTags", at = @At("RETURN"), cancellable = true)
     private static void isSame(ItemStack itemStack, ItemStack itemStack2, CallbackInfoReturnable<Boolean> cir) {
         if (!cir.getReturnValue() && itemStack.getItem().equals(itemStack2.getItem()) && itemStack.isEdible() && itemStack2.isEdible()) {
-            if (itemStack.hasTag() && itemStack.getTag().contains(FoodExpiryDataDrivenManager.TICKS_TAG) && itemStack2.hasTag() && itemStack2.getTag().contains(FoodExpiryDataDrivenManager.TICKS_TAG)) {
+            if (itemStack.hasTag() && itemStack.getTag().contains(FEDataDrivenManager.TICKS_TAG) && itemStack2.hasTag() && itemStack2.getTag().contains(FEDataDrivenManager.TICKS_TAG)) {
                 cir.setReturnValue(true);
             }
         }
@@ -91,7 +103,7 @@ public class ItemStackMixin {
 
     // Constructor
 
-    @Inject(method = "<init>(Lnet/minecraft/world/level/ItemLike;I)V>", at = @At("TAIL"))
+    /*@Inject(method = "<init>(Lnet/minecraft/world/level/ItemLike;I)V>", at = @At("TAIL"))
     private void onConstructorInit(ItemLike itemLike, int i, CallbackInfo ci) {
         System.out.println("Se creó un ItemStack con el ítem: " + itemLike + " y la cantidad: " + i);
 
@@ -100,5 +112,5 @@ public class ItemStackMixin {
         if (itemLike.asItem().equals(Items.COOKED_BEEF)) {
             System.out.println("Es CARNE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!");
         }
-    }
+    }*/
 }

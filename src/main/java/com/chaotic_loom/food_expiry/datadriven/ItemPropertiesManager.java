@@ -7,20 +7,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.Item;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 
 public class ItemPropertiesManager extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
@@ -32,7 +26,6 @@ public class ItemPropertiesManager extends SimpleJsonResourceReloadListener impl
         if (INSTANCE == null) {
             INSTANCE = new ItemPropertiesManager();
         }
-
         return INSTANCE;
     }
 
@@ -64,19 +57,46 @@ public class ItemPropertiesManager extends SimpleJsonResourceReloadListener impl
                                 if (itemObject.has("id") && itemObject.get("id").isJsonPrimitive()) {
                                     ResourceLocation itemId = new ResourceLocation(itemObject.get("id").getAsString());
 
-                                    // Parse item properties
-                                    long ticks = getOrDefault(itemObject, "ticks", 0L);
-                                    float pristineThreshold = getOrDefault(itemObject, "pristineThreshold", 0.0f);
-                                    float freshThreshold = getOrDefault(itemObject, "freshThreshold", 0.0f);
-                                    float agingThreshold = getOrDefault(itemObject, "agingThreshold", 0.0f);
-                                    float staleThreshold = getOrDefault(itemObject, "staleThreshold", 0.0f);
-                                    float spoiledThreshold = getOrDefault(itemObject, "spoiledThreshold", 0.0f);
-                                    float rottenThreshold = getOrDefault(itemObject, "rottenThreshold", 0.0f);
-                                    float moldyThreshold = getOrDefault(itemObject, "moldyThreshold", 0.0f);
+                                    // Parse base properties
+                                    long ticks = getOrDefault(itemObject, "ticks", ItemProperties.DEFAULT.getTicks());
+                                    float pristineThreshold = getOrDefault(itemObject, "pristineThreshold", ItemProperties.DEFAULT.getPristineThreshold());
+                                    float freshThreshold = getOrDefault(itemObject, "freshThreshold", ItemProperties.DEFAULT.getFreshThreshold());
+                                    float agingThreshold = getOrDefault(itemObject, "agingThreshold", ItemProperties.DEFAULT.getAgingThreshold());
+                                    float staleThreshold = getOrDefault(itemObject, "staleThreshold", ItemProperties.DEFAULT.getStaleThreshold());
+                                    float spoiledThreshold = getOrDefault(itemObject, "spoiledThreshold", ItemProperties.DEFAULT.getSpoiledThreshold());
 
-                                    ItemProperties properties = new ItemProperties(ticks, pristineThreshold,
-                                            freshThreshold, agingThreshold, staleThreshold,
-                                            spoiledThreshold, rottenThreshold, moldyThreshold);
+                                    // Parse temperatureVelocityModifiers
+                                    Map<String, Float> temperatureVelocityModifiers = new HashMap<>();
+                                    if (itemObject.has("temperatureVelocityModifiers") && itemObject.get("temperatureVelocityModifiers").isJsonObject()) {
+                                        JsonObject tempObj = itemObject.getAsJsonObject("temperatureVelocityModifiers");
+                                        tempObj.entrySet().forEach(entry -> {
+                                            temperatureVelocityModifiers.put(entry.getKey(), entry.getValue().getAsFloat());
+                                        });
+                                    } else {
+                                        temperatureVelocityModifiers.put("cold", ItemProperties.DEFAULT.getTemperatureVelocityModifiers().get("cold"));
+                                        temperatureVelocityModifiers.put("normal", ItemProperties.DEFAULT.getTemperatureVelocityModifiers().get("normal"));
+                                        temperatureVelocityModifiers.put("hot", ItemProperties.DEFAULT.getTemperatureVelocityModifiers().get("hot"));
+                                    }
+
+                                    // Parse seasonVelocityModifiers
+                                    Map<String, Float> seasonVelocityModifiers = new HashMap<>();
+                                    if (itemObject.has("seasonVelocityModifiers") && itemObject.get("seasonVelocityModifiers").isJsonObject()) {
+                                        JsonObject seasonObj = itemObject.getAsJsonObject("seasonVelocityModifiers");
+                                        seasonObj.entrySet().forEach(entry -> {
+                                            seasonVelocityModifiers.put(entry.getKey(), entry.getValue().getAsFloat());
+                                        });
+                                    } else {
+                                        seasonVelocityModifiers.put("spring", ItemProperties.DEFAULT.getSeasonVelocityModifiers().get("spring"));
+                                        seasonVelocityModifiers.put("summer", ItemProperties.DEFAULT.getSeasonVelocityModifiers().get("summer"));
+                                        seasonVelocityModifiers.put("autumn", ItemProperties.DEFAULT.getSeasonVelocityModifiers().get("autumn"));
+                                        seasonVelocityModifiers.put("winter", ItemProperties.DEFAULT.getSeasonVelocityModifiers().get("winter"));
+                                    }
+
+                                    // Crear la instancia de ItemProperties con los nuevos modificadores
+                                    ItemProperties properties = new ItemProperties(
+                                            ticks, pristineThreshold, freshThreshold, agingThreshold, staleThreshold, spoiledThreshold,
+                                            temperatureVelocityModifiers, seasonVelocityModifiers
+                                    );
 
                                     newProperties.put(itemId, properties);
                                     FoodExpiry.LOGGER.info("Loaded expiry property for: {}", itemId);
