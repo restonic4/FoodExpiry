@@ -35,6 +35,24 @@ public abstract class InventoryMixin {
             @Local(ordinal = 1) ItemStack originalStack,
             @Local(ordinal = 2) int addedAmount
     ) {
+        System.out.println("Resource added (" + addedAmount + "), " + newStack+ ", " + originalStack);
+    }
+
+    /*@Inject(
+            method = "addResource(ILnet/minecraft/world/item/ItemStack;)I",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/ItemStack;grow(I)V",
+                    shift = At.Shift.AFTER
+            )
+    )
+    private void onAddResource(
+            int slot,
+            ItemStack newStack,
+            CallbackInfoReturnable<Integer> cir,
+            @Local(ordinal = 1) ItemStack originalStack,
+            @Local(ordinal = 2) int addedAmount
+    ) {
         if (FEDataDrivenManager.hasTag(newStack)) {
             CompoundTag newTag = newStack.getTag();
             ListTag newTicks = newTag.getList(FEDataDrivenManager.TICKS_TAG, Tag.TAG_LONG);
@@ -65,5 +83,5 @@ public abstract class InventoryMixin {
             FEDataDrivenManager.fixFood(originalStack);
             FEDataDrivenManager.fixFood(newStack);
         }
-    }
+    }*/
 }
